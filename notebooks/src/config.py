@@ -8,7 +8,7 @@ PASTA_DADOS = PASTA_PROJETO / "dados"
 # abaixo o caminho para os arquivos de dados do projeto
 DADOS_ORIGINAIS = PASTA_DADOS / "housing.csv.zip"
 DADOS_LIMPOS = PASTA_DADOS / "housing_clean.parquet"
-DADOS_GEO_ORIGINAIS = PASTA_DADOS / "california_counties.geojson"
+DADOS_GEO_ORIGINAIS = PASTA_DADOS / "california-counties.geojson"
 DADOS_GEO_MEDIAN = PASTA_DADOS / "gdf_counties.parquet"
 
 # coloque abaixo o caminho para os arquivos de modelos de seu projeto
