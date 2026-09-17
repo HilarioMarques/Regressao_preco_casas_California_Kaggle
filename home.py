@@ -38,7 +38,7 @@ population = gdf_geo.query("name == @selecionar_condado")["population"].values
 households = gdf_geo.query("name == @selecionar_condado")["households"].values
 
 
-median_income = st.slider("Renda média (milhares de US$)", 5.0, 150.0, 45.0, 5.0)
+median_income = st.slider("Renda média (milhares de US$)", 5.0, 100.0, 45.0, 5.0)
 
 ocean_proximity = gdf_geo.query("name == @selecionar_condado")["ocean_proximity"].values
 
