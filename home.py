@@ -30,7 +30,7 @@ selecionar_condado = st.selectbox("Condado", condados)
 longitude = gdf_geo.query("name == @selecionar_condado")["longitude"].values
 latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
 
-housing_median_age = st.number_input("Idade do imóvel", value=10)
+housing_median_age = st.number_input("Idade do imóvel", value=10, min_value=1, max_value=50)
 
 total_rooms = st.number_input("Total de cômodos", value=800)
 total_bedrooms = st.number_input("Total de quartos", value=100)
