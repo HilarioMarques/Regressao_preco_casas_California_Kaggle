@@ -61,7 +61,7 @@ entrada_modelo = {
     "population_per_household":population_per_household,
 }
 
-df_entrada_modelo = pd.DataFrame(entrada_modelo)
+df_entrada_modelo = pd.DataFrame(entrada_modelo, index=[0])
 
 botao_previsao = st.button("Prever Preço")
 
