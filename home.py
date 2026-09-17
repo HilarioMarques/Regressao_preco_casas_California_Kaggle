@@ -24,10 +24,11 @@ modelo = carregar_modelo()
 
 st.title("Previsão de preços de imóveis na California(USA)")
 
-condados = gdf_geo
+condados = list(gdf_geo["name"].sort_values())
+selecionar_condado = st.selectbox("Condado", condados)
 
-longitude = st.number_input("Longitude", value=-122.33)
-latitude = st.number_input("Latitude", value=37.88)
+longitude = gdf_geo.query("name == @selecionar_condado")["longitude"].values
+latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
 
 housing_median_age = st.number_input("Idade do imóvel", value=10)
 
