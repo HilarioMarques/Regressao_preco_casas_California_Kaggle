@@ -36,3 +36,7 @@ households = st.number_input("Domicílios", value=100)
 
 
 median_income = st.slider("Renda média (múltiplos de US$ 10k)", 0.5, 15.0, 4.5, 0.5)
+
+ocean_proximity = st.selectbox("Proximidade do oceano", df["ocean_proximity"].unique())
+
+median_income_cat = st.number_input()
