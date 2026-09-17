@@ -32,10 +32,10 @@ latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
 
 housing_median_age = st.number_input("Idade do imóvel", value=10, min_value=1, max_value=50)
 
-total_rooms = st.number_input("Total de cômodos", value=800)
-total_bedrooms = st.number_input("Total de quartos", value=100)
-population = st.number_input("População", value=300)
-households = st.number_input("Domicílios", value=100)
+total_rooms = gdf_geo.query("name == @selecionar_condado")["total_rooms"].values
+total_bedrooms = gdf_geo.query("name == @selecionar_condado")["total_bedrooms"].values
+population = gdf_geo.query("name == @selecionar_condado")["population"].values
+households = gdf_geo.query("name == @selecionar_condado")["households"].values
 
 
 median_income = st.slider("Renda média (múltiplos de US$ 10k)", 0.5, 15.0, 4.5, 0.5)
