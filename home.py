@@ -24,6 +24,8 @@ modelo = carregar_modelo()
 
 st.title("Previsão de preços de imóveis na California(USA)")
 
+condados = gdf_geo
+
 longitude = st.number_input("Longitude", value=-122.33)
 latitude = st.number_input("Latitude", value=37.88)
 
