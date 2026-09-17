@@ -23,3 +23,8 @@ gdf_geo = carregar_dados_geo()
 modelo = carregar_modelo()
 
 st.title("Previsão de preços de imóveis na California(USA)")
+
+longitude = st.number_input("Longitude", value=-122.33)
+latitude = st.number_input("Latitude", value=-37.88)
+
+housing_median_age = 
