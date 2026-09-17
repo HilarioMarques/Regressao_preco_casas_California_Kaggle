@@ -39,4 +39,18 @@ median_income = st.slider("Renda média (múltiplos de US$ 10k)", 0.5, 15.0, 4.5
 
 ocean_proximity = st.selectbox("Proximidade do oceano", df["ocean_proximity"].unique())
 
-median_income_cat = st.number_input()
+median_income_cat = st.number_input("Categoria de renda", value=4)
+
+rooms_per_household = st.number_input("Quartos por domicílio", value=7)
+bedrooms_per_room = st.number_input("Quartos por cômodos", value=0.2)
+population_per_household = st.number_input("Pessoas por domicílio", value=2)
+
+entrada_modelo = {
+    "longitude": longitude,
+    "lalatitude":latitude,
+    "hohousing_median_age":housing_median_age,
+    "longitude": longitude,
+    "longitude": longitude,
+    "longitude": longitude,
+    "longitude": longitude,
+}
