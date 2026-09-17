@@ -47,10 +47,24 @@ population_per_household = st.number_input("Pessoas por domicílio", value=2)
 
 entrada_modelo = {
     "longitude": longitude,
-    "lalatitude":latitude,
-    "hohousing_median_age":housing_median_age,
-    "longitude": longitude,
-    "longitude": longitude,
-    "longitude": longitude,
-    "longitude": longitude,
+    "latitude":latitude,
+    "housing_median_age":housing_median_age,
+    "total_rooms":total_rooms,
+    "total_bedrooms": total_bedrooms,
+    "population":population,
+    "households": households,
+    "median_income": median_income,
+    "ocean_proximity":ocean_proximity,
+    "median_income_cat":median_income_cat,
+    "rooms_per_household":rooms_per_household,
+    "bedrooms_per_room":bedrooms_per_room,
+    "population_per_household":population_per_household,
 }
+
+df_entrada_modelo = pd.DataFrame(entrada_modelo)
+
+botao_previsao = st.button("Prever Preço")
+
+if botao_previsao:
+    preco = modelo.predict(df_entrada_modelo)
+    st.write(f"Preço previsto: {preco}")
