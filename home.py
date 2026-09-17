@@ -67,4 +67,4 @@ botao_previsao = st.button("Prever Preço")
 
 if botao_previsao:
     preco = modelo.predict(df_entrada_modelo)
-    st.write(f"Preço previsto: {preco}")
+    st.write(f"Preço previsto: US$ {preco[0][0]:.2f}")
