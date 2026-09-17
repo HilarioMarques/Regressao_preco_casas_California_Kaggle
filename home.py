@@ -41,9 +41,9 @@ ocean_proximity = st.selectbox("Proximidade do oceano", df["ocean_proximity"].un
 
 median_income_cat = st.number_input("Categoria de renda", value=4)
 
-rooms_per_household = st.number_input("Quartos por domicílio", value=7)
+room_per_households = st.number_input("Quartos por domicílio", value=7)
 bedrooms_per_room = st.number_input("Quartos por cômodos", value=0.2)
-population_per_household = st.number_input("Pessoas por domicílio", value=2)
+population_per_households = st.number_input("Pessoas por domicílio", value=2)
 
 entrada_modelo = {
     "longitude": longitude,
@@ -56,9 +56,9 @@ entrada_modelo = {
     "median_income": median_income,
     "ocean_proximity":ocean_proximity,
     "median_income_cat":median_income_cat,
-    "rooms_per_household":rooms_per_household,
+    "room_per_households":room_per_households,
     "bedrooms_per_room":bedrooms_per_room,
-    "population_per_household":population_per_household,
+    "population_per_households":population_per_households,
 }
 
 df_entrada_modelo = pd.DataFrame(entrada_modelo, index=[0])
