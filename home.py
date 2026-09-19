@@ -78,9 +78,10 @@ with coluna1:
         st.write(f"Preço previsto: US$ {preco[0][0]:.2f}")
 
 with coluna2:
+
     view_state = pdk.ViewState(
-        latitude=latitude,
-        longitude=longitude,
+        latitude=float(latitude[0]),
+        longitude=float(longitude[0]),
         zoom=5,
         min_zoom=5,
         max_zoom=15,
