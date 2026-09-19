@@ -1,6 +1,7 @@
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+import pydeck as pdk
 import streamlit as st
 
 from joblib import load
@@ -77,4 +78,12 @@ with coluna1:
         st.write(f"Preço previsto: US$ {preco[0][0]:.2f}")
 
 with coluna2:
-    pass
+    view_state = pdk.ViewState(
+        latitude=37.88,
+        longitude= -122.33,
+    )
+    mapa = pdk.Deck(
+        initial_view_state=view_state,
+    )
+
+    st.pydeck_chart(mapa)
