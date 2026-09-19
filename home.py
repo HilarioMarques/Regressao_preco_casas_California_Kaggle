@@ -27,52 +27,54 @@ st.title("Previsão de preços de imóveis na California(USA)")
 condados = list(gdf_geo["name"].sort_values())
 coluna1, coluna2 = st.columns(2)
 
-selecionar_condado = st.selectbox("Condado", condados)
+with coluna1:
+    selecionar_condado = st.selectbox("Condado", condados)
+
+    longitude = gdf_geo.query("name == @selecionar_condado")["longitude"].values
+    latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
+
+    housing_median_age = st.number_input("Idade do imóvel", value=10, min_value=1, max_value=50)
+
+    total_rooms = gdf_geo.query("name == @selecionar_condado")["total_rooms"].values
+    total_bedrooms = gdf_geo.query("name == @selecionar_condado")["total_bedrooms"].values
+    population = gdf_geo.query("name == @selecionar_condado")["population"].values
+    households = gdf_geo.query("name == @selecionar_condado")["households"].values
 
 
+    median_income = st.slider("Renda média (milhares de US$)", 5.0, 100.0, 45.0, 5.0)
 
-longitude = gdf_geo.query("name == @selecionar_condado")["longitude"].values
-latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
+    ocean_proximity = gdf_geo.query("name == @selecionar_condado")["ocean_proximity"].values
 
-housing_median_age = st.number_input("Idade do imóvel", value=10, min_value=1, max_value=50)
+    bins_income = [0, 1.5, 3, 4.5, 6, np.inf]
+    median_income_cat = np.digitize(median_income/10, bins=bins_income)
 
-total_rooms = gdf_geo.query("name == @selecionar_condado")["total_rooms"].values
-total_bedrooms = gdf_geo.query("name == @selecionar_condado")["total_bedrooms"].values
-population = gdf_geo.query("name == @selecionar_condado")["population"].values
-households = gdf_geo.query("name == @selecionar_condado")["households"].values
+    room_per_households = gdf_geo.query("name == @selecionar_condado")["room_per_households"].values
+    bedrooms_per_room = gdf_geo.query("name == @selecionar_condado")["bedrooms_per_room"].values
+    population_per_households = gdf_geo.query("name == @selecionar_condado")["population_per_households"].values
 
+    entrada_modelo = {
+        "longitude": longitude,
+        "latitude":latitude,
+        "housing_median_age":housing_median_age,
+        "total_rooms":total_rooms,
+        "total_bedrooms": total_bedrooms,
+        "population":population,
+        "households": households,
+        "median_income": median_income/10,
+        "ocean_proximity":ocean_proximity,
+        "median_income_cat":median_income_cat,
+        "room_per_households":room_per_households,
+        "bedrooms_per_room":bedrooms_per_room,
+        "population_per_households":population_per_households,
+    }
 
-median_income = st.slider("Renda média (milhares de US$)", 5.0, 100.0, 45.0, 5.0)
+    df_entrada_modelo = pd.DataFrame(entrada_modelo, index=[0])
 
-ocean_proximity = gdf_geo.query("name == @selecionar_condado")["ocean_proximity"].values
+    botao_previsao = st.button("Prever Preço")
 
-bins_income = [0, 1.5, 3, 4.5, 6, np.inf]
-median_income_cat = np.digitize(median_income/10, bins=bins_income)
+    if botao_previsao:
+        preco = modelo.predict(df_entrada_modelo)
+        st.write(f"Preço previsto: US$ {preco[0][0]:.2f}")
 
-room_per_households = gdf_geo.query("name == @selecionar_condado")["room_per_households"].values
-bedrooms_per_room = gdf_geo.query("name == @selecionar_condado")["bedrooms_per_room"].values
-population_per_households = gdf_geo.query("name == @selecionar_condado")["population_per_households"].values
-
-entrada_modelo = {
-    "longitude": longitude,
-    "latitude":latitude,
-    "housing_median_age":housing_median_age,
-    "total_rooms":total_rooms,
-    "total_bedrooms": total_bedrooms,
-    "population":population,
-    "households": households,
-    "median_income": median_income/10,
-    "ocean_proximity":ocean_proximity,
-    "median_income_cat":median_income_cat,
-    "room_per_households":room_per_households,
-    "bedrooms_per_room":bedrooms_per_room,
-    "population_per_households":population_per_households,
-}
-
-df_entrada_modelo = pd.DataFrame(entrada_modelo, index=[0])
-
-botao_previsao = st.button("Prever Preço")
-
-if botao_previsao:
-    preco = modelo.predict(df_entrada_modelo)
-    st.write(f"Preço previsto: US$ {preco[0][0]:.2f}")
+with coluna2:
+    pass
