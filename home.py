@@ -86,6 +86,13 @@ with coluna2:
         min_zoom=5,
         max_zoom=15,
     )
+
+    polygon_layer = pdk.Layer(
+        "PolygonLayer",
+        data=gdf_geo[["name", "geometry"]],
+        
+    )
+
     mapa = pdk.Deck(
         initial_view_state=view_state,
         map_style="light"
