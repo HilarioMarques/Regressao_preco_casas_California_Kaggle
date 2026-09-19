@@ -79,11 +79,15 @@ with coluna1:
 
 with coluna2:
     view_state = pdk.ViewState(
-        latitude=37.88,
-        longitude= -122.33,
+        latitude=latitude,
+        longitude=longitude,
+        zoom=5,
+        min_zoom=5,
+        max_zoom=15,
     )
     mapa = pdk.Deck(
         initial_view_state=view_state,
+        map_style="light"
     )
 
     st.pydeck_chart(mapa)
