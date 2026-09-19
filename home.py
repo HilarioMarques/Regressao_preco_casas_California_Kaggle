@@ -25,7 +25,11 @@ modelo = carregar_modelo()
 st.title("Previsão de preços de imóveis na California(USA)")
 
 condados = list(gdf_geo["name"].sort_values())
+coluna1, coluna2 = st.columns(2)
+
 selecionar_condado = st.selectbox("Condado", condados)
+
+
 
 longitude = gdf_geo.query("name == @selecionar_condado")["longitude"].values
 latitude = gdf_geo.query("name == @selecionar_condado")["latitude"].values
