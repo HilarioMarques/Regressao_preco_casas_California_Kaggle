@@ -133,8 +133,13 @@ with coluna2:
         get_fill_color = [255, 0, 0, 100],
         get_line_color = [0, 0, 0],
         get_line_width = 500,
-
     )
+
+    tooltip = {
+        "html": "<b>Condado:</b> {name}",
+        "style":{}
+
+    }
 
     mapa = pdk.Deck(
         initial_view_state=view_state,
