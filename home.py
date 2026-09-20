@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
+import shapely
 
 from joblib import load
 from notebooks.src.config import DADOS_GEO_MEDIAN, DADOS_LIMPOS, MODELO_FINAL
@@ -13,7 +14,17 @@ def carregar_dados_limpos():
 
 @st.cache_data
 def carregar_dados_geo():
-    return gpd.read_parquet(DADOS_GEO_MEDIAN)
+    gdf_geo = gpd.read_parquet(DADOS_GEO_MEDIAN)
+
+    gdf_geo = gdf_geo.explode(ignore_index=True)
+
+    def fix_and_orient_geometry(geometry):
+        if not geometry.is_valid:
+            geometry = geometry.buffer(0)
+        if isinstance(
+            geometry, (shapely.geometry.Polygon, shapely.geometry.MultiPolygon)
+        ):
+            geometry = shapely.geometry.pol
 
 @st.cache_resource
 def carregar_modelo():
