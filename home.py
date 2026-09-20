@@ -97,7 +97,7 @@ with coluna1:
         "population_per_households":population_per_households,
     }
 
-    df_entrada_modelo = pd.DataFrame(entrada_modelo, index=[0])
+    df_entrada_modelo = pd.DataFrame(entrada_modelo)
 
     botao_previsao = st.button("Prever Preço")
 
@@ -132,14 +132,14 @@ with coluna2:
         get_polygon="geometry",
         get_fill_color = [255, 0, 0, 100],
         get_line_color = [0, 0, 0],
-        get_line_width = 50,
+        get_line_width = 500,
 
     )
 
     mapa = pdk.Deck(
         initial_view_state=view_state,
         map_style="light",
-        layers=[polygon_layer],
+        layers=[polygon_layer, highlight_layer],
     )
 
     st.pydeck_chart(mapa)
