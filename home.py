@@ -24,7 +24,24 @@ def carregar_dados_geo():
         if isinstance(
             geometry, (shapely.geometry.Polygon, shapely.geometry.MultiPolygon)
         ):
-            geometry = shapely.geometry.pol
+            geometry = shapely.geometry.polygon.orient(geometry, sign=1.0)
+        return geometry
+
+    gdf_geo["geometry"] = gdf_geo["geometry"].apply(fix_and_orient_geometry)
+
+    def get_polygon_coordinates(geometry):
+        return(
+            [[[x, y] for x, y in geometry.exterior.coords]]
+            if isinstance(geometry, shapely.geometry.Polygon)
+            else [
+                [[x, y] for x, y in polygon.exterior.coords]
+                for polygon in geometry.geoms
+            ]
+        )
+
+    gdf_geo["geometry"] = gdf_geo["geometry"].apply(get_polygon_coordinates)
+
+    return gdf_geo
 
 @st.cache_resource
 def carregar_modelo():
